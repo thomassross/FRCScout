@@ -30,22 +30,6 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
 
         final Activity us = this;
 
-        /*ListView listView = (ListView) findViewById(R.id.teamListView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                TextView textView = (TextView) view;
-                String tvText = textView.getText().toString();
-                int teamNumber = Integer.parseInt(tvText.substring(0, tvText.indexOf(" "))); // TODO
-
-                Intent intent = new Intent(us, EditTeam.class);
-                intent.putExtra("io.thomasross.frcscout.teamnumber", teamNumber);
-                startActivity(intent);
-            }
-        });*/
-
         FloatingActionButton addTeamBtn = (FloatingActionButton) findViewById(R.id.addTeam);
         addTeamBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -75,7 +59,6 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data)
     {
-        ArrayList<String> teamNumbers = new ArrayList<>();
         ArrayList<Team> teams = new ArrayList<>();
 
         if (data.getCount() == 0) { return; }
@@ -117,15 +100,9 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
 
             Team team = new Team(data.getInt(0), data.getString(1), data.getString(2), data.getInt(3), numTasksAble, tasks.size());
             teams.add(team);
-
-            /*teamNumbers.add("" + data.getInt(0) + " - " + data.getString(1) + "\n\t"
-                    + numTasksAble + "/" + tasks.size() + " tasks, " + data.getInt(3) + " auto points");*/
         }
 
-        //String[] teamNumbersArr = teamNumbers.toArray(new String[teamNumbers.size()]);
-
         TeamListAdapter adapter = new TeamListAdapter(this, R.layout.teamlistitem, teams);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.simpletextview, teamNumbersArr);
         ListView listView = (ListView) findViewById(R.id.teamListView);
         listView.setAdapter(adapter);
     }
