@@ -14,6 +14,7 @@ import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import io.thomasross.frcscout.adapters.TaskListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
 import io.thomasross.frcscout.tasks.DeleteTeamTask;
 import io.thomasross.frcscout.tasks.UpdateTeamTask;
@@ -135,19 +136,7 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
         return new TeamLoader(this, null, where, whereArgs);
     }
 
-    private class Task //TODO: move to its own file
-    {
-        String code;
-        String name;
-        boolean isTeamAble;
 
-        public Task(String code, String name, boolean isTeamAble)
-        {
-            this.code = code;
-            this.name = name;
-            this.isTeamAble = isTeamAble;
-        }
-    }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data)
@@ -215,67 +204,5 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
     public void done()
     {
         finish();
-    }
-
-    private class TaskListAdapter extends ArrayAdapter<Task>
-    {
-        private ArrayList<Task> taskList;
-
-        public TaskListAdapter(Context context, int resource, List<Task> objects)
-        {
-            super(context, resource, objects);
-
-            this.taskList = new ArrayList<>();
-            this.taskList.addAll(objects);
-        }
-
-        private class ViewHolder
-        {
-            CheckBox able;
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            ViewHolder holder;
-
-            if (convertView == null)
-            {
-                LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = vi.inflate(R.layout.tasklistitem, null);
-
-                holder = new ViewHolder();
-                holder.able = (CheckBox) convertView.findViewById(R.id.checkBox);
-                convertView.setTag(holder);
-
-                holder.able.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        CheckBox checkBox = (CheckBox) v;
-                        Task task = (Task) v.getTag();
-                        task.isTeamAble = checkBox.isChecked();
-                    }
-                });
-            }
-            else
-            {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            Task task = taskList.get(position);
-            holder.able.setChecked(task.isTeamAble);
-            holder.able.setText(task.name);
-            holder.able.setTag(task);
-
-            return convertView;
-        }
-
-        public ArrayList<Task> getTaskList()
-        {
-            return taskList;
-        }
     }
 }
