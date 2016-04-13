@@ -13,6 +13,7 @@ import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import io.thomasross.frcscout.adapters.TeamListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
 
 import java.lang.reflect.Type;
@@ -29,7 +30,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
 
         final Activity us = this;
 
-        ListView listView = (ListView) findViewById(R.id.teamListView);
+        /*ListView listView = (ListView) findViewById(R.id.teamListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -43,7 +44,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
                 intent.putExtra("io.thomasross.frcscout.teamnumber", teamNumber);
                 startActivity(intent);
             }
-        });
+        });*/
 
         FloatingActionButton addTeamBtn = (FloatingActionButton) findViewById(R.id.addTeam);
         addTeamBtn.setOnClickListener(new View.OnClickListener()
@@ -75,6 +76,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
     public void onLoadFinished(Loader<Cursor> loader, Cursor data)
     {
         ArrayList<String> teamNumbers = new ArrayList<>();
+        ArrayList<Team> teams = new ArrayList<>();
 
         if (data.getCount() == 0) { return; }
 
@@ -86,7 +88,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
             Gson gson = new GsonBuilder().create();
             HashMap<String, Boolean> tasksMap = gson.fromJson(tasksJSON, jsonType);
 
-            ArrayList<String> tasks = new ArrayList<String>();
+            ArrayList<String> tasks = new ArrayList<>();
             tasks.add("portcullis");
             tasks.add("cheval");
             tasks.add("moat");
@@ -113,13 +115,17 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
                 }
             }
 
-            teamNumbers.add("" + data.getInt(0) + " - " + data.getString(1) + "\n\t"
-                    + numTasksAble + "/" + tasks.size() + " tasks, " + data.getInt(3) + " auto points");
+            Team team = new Team(data.getInt(0), data.getString(1), data.getString(2), data.getInt(3), numTasksAble, tasks.size());
+            teams.add(team);
+
+            /*teamNumbers.add("" + data.getInt(0) + " - " + data.getString(1) + "\n\t"
+                    + numTasksAble + "/" + tasks.size() + " tasks, " + data.getInt(3) + " auto points");*/
         }
 
-        String[] teamNumbersArr = teamNumbers.toArray(new String[teamNumbers.size()]);
+        //String[] teamNumbersArr = teamNumbers.toArray(new String[teamNumbers.size()]);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.simpletextview, teamNumbersArr);
+        TeamListAdapter adapter = new TeamListAdapter(this, R.layout.teamlistitem, teams);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.simpletextview, teamNumbersArr);
         ListView listView = (ListView) findViewById(R.id.teamListView);
         listView.setAdapter(adapter);
     }

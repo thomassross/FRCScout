@@ -6,4 +6,6 @@
     <string name="done_btn">Done</string>
     <string name="delete_btn">Delete</string>
     <string name="autonomouspoints_lbl">Autonomous Points</string>
+    <string name="more">More</string>
+    <string name="tbalink">The Blue Alliance</string>
 </resources>

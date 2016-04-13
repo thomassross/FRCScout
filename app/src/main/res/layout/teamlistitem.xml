@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dip">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXX - Hello World Robotics"
+            android:textColor="#212121"
+            android:id="@+id/teamlist_namenum"
+            android:textSize="15sp"
+            android:singleLine="false"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12/12 tasks, 15 auto points"
+            android:textColor="#212121"
+            android:id="@+id/teamlist_teamstats"
+            android:layout_below="@+id/teamlist_namenum"
+            android:layout_alignParentStart="true"
+            android:textSize="15sp"/>
+
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/teamlist_morebtn"
+            android:src="@drawable/ic_more_vert_black"
+            android:background="@null"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/more"
+            android:layout_centerVertical="true"/>
+
+</RelativeLayout>
