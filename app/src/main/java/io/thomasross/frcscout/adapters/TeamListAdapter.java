@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import io.thomasross.frcscout.EditTeam;
 import io.thomasross.frcscout.R;
-import io.thomasross.frcscout.Team;
+import io.thomasross.frcscout.models.Team;
 
 import java.util.ArrayList;
 import java.util.List;

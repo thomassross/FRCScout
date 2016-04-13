@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.tasks.InsertTeamTask;
 
 public class AddTeam extends AppCompatActivity implements FinishedCallback

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import io.thomasross.frcscout.FinishedCallback;
-import io.thomasross.frcscout.Team;
+import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.TeamsOpenHelper;
 
 import java.util.ArrayList;

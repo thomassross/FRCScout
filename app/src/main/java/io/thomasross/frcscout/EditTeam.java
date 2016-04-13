@@ -2,7 +2,6 @@ package io.thomasross.frcscout;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -16,13 +15,14 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.thomasross.frcscout.adapters.TaskListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
+import io.thomasross.frcscout.models.Task;
+import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.tasks.DeleteTeamTask;
 import io.thomasross.frcscout.tasks.UpdateTeamTask;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,FinishedCallback
 {

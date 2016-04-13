@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import io.thomasross.frcscout.R;
-import io.thomasross.frcscout.Task;
+import io.thomasross.frcscout.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;

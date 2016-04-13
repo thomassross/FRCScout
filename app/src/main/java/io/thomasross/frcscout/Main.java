@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.thomasross.frcscout.adapters.TeamListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
+import io.thomasross.frcscout.models.Team;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

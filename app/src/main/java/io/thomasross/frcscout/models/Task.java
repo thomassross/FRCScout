@@ -1,4 +1,4 @@
-package io.thomasross.frcscout;
+package io.thomasross.frcscout.models;
 
 public class Task
 {
