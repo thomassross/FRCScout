@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:weightSum="1">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/teamnumber_lbl"
+            android:id="@+id/teamnumber_lbl_ET" android:labelFor="@+id/teamnumber_edit_ET"
+            android:textSize="18sp"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/teamnumber_edit_ET"
+            android:clickable="false"
+            android:editable="false"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/teamname_lbl"
+              android:id="@+id/teamname_lbl_ET" android:labelFor="@+id/teamname_edit_ET"
+              android:textIsSelectable="false"
+              android:textSize="18sp"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:ems="10" android:id="@+id/teamname_edit_ET" android:inputType="text"
+    />
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/autonomouspoints_lbl"
+                android:id="@+id/autonomouspoints_lbl_ET"
+                android:textSize="18sp"
+                android:labelFor="@+id/autonomouspoints_edit_ET"/>
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/autonomouspoints_edit_ET"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/tasksList"
+            android:layout_weight="1"
+            tools:listitem="@layout/tasklistitem"/>
+
+</LinearLayout>

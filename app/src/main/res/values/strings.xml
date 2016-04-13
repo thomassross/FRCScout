@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FRC Scout</string>
+    <string name="teamnumber_lbl">Team Number</string>
+    <string name="teamname_lbl">Team Name</string>
+    <string name="done_btn">Done</string>
+    <string name="delete_btn">Delete</string>
+    <string name="autonomouspoints_lbl">Autonomous Points</string>
+</resources>
