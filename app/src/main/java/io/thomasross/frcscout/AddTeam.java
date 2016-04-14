@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.tasks.InsertTeamTask;
 
@@ -48,12 +49,23 @@ public class AddTeam extends AppCompatActivity implements FinishedCallback
 
         if (teamNumText.isEmpty())
         {
-            finish();
+            Toast.makeText(this, "Invalid team number", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        int teamNumber;
+        try
+        {
+            teamNumber = Integer.parseInt(teamNumText);
+        }
+        catch (NumberFormatException | NullPointerException ignored)
+        {
+            Toast.makeText(this, "Invalid team number", Toast.LENGTH_LONG).show();
             return;
         }
 
         Team team = new Team(
-                Integer.parseInt(teamNumText),
+                teamNumber,
                 teamNameText,
                 "{}",
                 0
