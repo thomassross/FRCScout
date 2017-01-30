@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import io.thomasross.frcscout.FinishedCallback;
+import io.thomasross.frcscout.GamesManager;
 import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.TeamsOpenHelper;
 
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 
 public class UpdateTeamTask extends AsyncTask<Team, Void, Void>
 {
-    Context context;
-    ArrayList<FinishedCallback> finishedCallbacks = new ArrayList<>();
+    private Context context;
+    private ArrayList<FinishedCallback> finishedCallbacks = new ArrayList<>();
 
     public UpdateTeamTask(Context context)
     {
@@ -50,7 +51,7 @@ public class UpdateTeamTask extends AsyncTask<Team, Void, Void>
             values.put("TASKS", team.tasks);
             values.put("AUTOPTS", team.autoPoints);
             String[] whereArgs = {"" + team.number};
-            writeableDB.update("Teams", values, "TEAMNUMBER = ?", whereArgs);
+            writeableDB.update(GamesManager.getCurrentTableName(), values, "TEAMNUMBER = ?", whereArgs);
         }
 
         writeableDB.close();

@@ -4,21 +4,22 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import io.thomasross.frcscout.GamesManager;
 import io.thomasross.frcscout.TeamsOpenHelper;
 
 public class TeamLoader extends AsyncTaskLoader<Cursor>
 {
-    TeamsOpenHelper teamsDatabase;
+    private TeamsOpenHelper teamsDatabase;
 
-    String[] columns;
-    String where;
-    String[] whereArgs;
+    private String[] columns;
+    private String where;
+    private String[] whereArgs;
 
     public TeamLoader(Context context, String[] columns, String where, String[] whereArgs)
     {
         super(context);
 
-        teamsDatabase = new TeamsOpenHelper(context);
+        this.teamsDatabase = new TeamsOpenHelper(context);
 
         this.columns = columns;
         this.where = where;
@@ -30,14 +31,12 @@ public class TeamLoader extends AsyncTaskLoader<Cursor>
     {
         SQLiteDatabase readableDB = teamsDatabase.getReadableDatabase();
 
-        Cursor results = readableDB.query("Teams",
-                columns,
-                where,
-                whereArgs,
-                null,
-                null,
-                null);
-
-        return results;
+        return readableDB.query(GamesManager.getCurrentTableName(),
+                                columns,
+                                where,
+                                whereArgs,
+                                null,
+                                null,
+                                null);
     }
 }

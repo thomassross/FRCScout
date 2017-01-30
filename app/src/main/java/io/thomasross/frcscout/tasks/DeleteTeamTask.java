@@ -4,14 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import io.thomasross.frcscout.FinishedCallback;
+import io.thomasross.frcscout.GamesManager;
 import io.thomasross.frcscout.TeamsOpenHelper;
 
 import java.util.ArrayList;
 
 public class DeleteTeamTask extends AsyncTask<Integer, Void, Void>
 {
-    Context context;
-    ArrayList<FinishedCallback> finishedCallbacks = new ArrayList<>();
+    private Context context;
+    private ArrayList<FinishedCallback> finishedCallbacks = new ArrayList<>();
 
     public DeleteTeamTask(Context context)
     {
@@ -45,7 +46,7 @@ public class DeleteTeamTask extends AsyncTask<Integer, Void, Void>
         {
             String where = "TEAMNUMBER = ?";
             String[] whereArgs = {"" + teamNumber};
-            writeableDB.delete("Teams", where, whereArgs);
+            writeableDB.delete(GamesManager.getCurrentTableName(), where, whereArgs);
         }
 
         writeableDB.close();

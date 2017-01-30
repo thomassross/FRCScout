@@ -159,19 +159,7 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
             Gson gson = new GsonBuilder().create();
             HashMap<String, Boolean> tasksMap = gson.fromJson(tasksJSON, jsonType);
 
-            HashMap<String, String> taskDetails = new HashMap<>();
-            taskDetails.put("portcullis", "Portcullis");
-            taskDetails.put("cheval", "Cheval de Frise");
-            taskDetails.put("moat", "Moat");
-            taskDetails.put("ramparts", "Ramparts");
-            taskDetails.put("drawbridge", "Drawbridge");
-            taskDetails.put("sallyport", "Sally Port");
-            taskDetails.put("rockwall", "Rock Wall");
-            taskDetails.put("roughterrain", "Rough Terrain");
-            taskDetails.put("lowbar", "Low Bar");
-            taskDetails.put("lowgoal", "Low Goal");
-            taskDetails.put("highgoal", "High Goal");
-            taskDetails.put("scaletower", "Scale Tower");
+            HashMap<String, String> taskDetails = GamesManager.getTasks();
 
             ArrayList<Task> teamAbleTasks = new ArrayList<>();
             for (String key : taskDetails.keySet())

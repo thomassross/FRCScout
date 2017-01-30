@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/menu_stronghold_2016"
+            android:title="@string/stronghold_2016_btn"/>
+
+    <item
+            android:id="@+id/menu_steamworks_2017"
+            android:title="@string/steamworks_2017_btn"/>
+</menu>

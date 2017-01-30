@@ -6,9 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TeamsOpenHelper extends SQLiteOpenHelper
 {
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "Teams";
-    private static final String DATABASE_TABLE_NAME = "Teams";
 
     public TeamsOpenHelper(Context context)
     {
@@ -18,7 +17,14 @@ public class TeamsOpenHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE " + DATABASE_TABLE_NAME + " (" +
+        db.execSQL("CREATE TABLE " + GamesManager.GAME_2016_TABLE_NAME + " (" +
+                "TEAMNUMBER INT NOT NULL, " +
+                "TEAMNAME TEXT, " +
+                "TASKS TEXT, " +
+                "AUTOPTS INT" +
+                ");");
+
+        db.execSQL("CREATE TABLE " + GamesManager.GAME_2017_TABLE_NAME + " (" +
                 "TEAMNUMBER INT NOT NULL, " +
                 "TEAMNAME TEXT, " +
                 "TASKS TEXT, " +
@@ -29,7 +35,22 @@ public class TeamsOpenHelper extends SQLiteOpenHelper
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        db.execSQL("ALTER TABLE " + DATABASE_TABLE_NAME + " " +
-                "ADD COLUMN AUTOPTS INT;");
+        if (oldVersion < 4)
+        {
+            db.execSQL("ALTER TABLE Teams " +
+                    "ADD COLUMN AUTOPTS INT;");
+        }
+
+        if (oldVersion == 4 && newVersion == 5)
+        {
+            db.execSQL("ALTER TABLE Teams RENAME TO " + GamesManager.GAME_2016_TABLE_NAME);
+
+            db.execSQL("CREATE TABLE " + GamesManager.GAME_2017_TABLE_NAME + " (" +
+                    "TEAMNUMBER INT NOT NULL, " +
+                    "TEAMNAME TEXT, " +
+                    "TASKS TEXT, " +
+                    "AUTOPTS INT" +
+                    ");");
+        }
     }
 }
