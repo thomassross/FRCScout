@@ -1,4 +1,4 @@
-package io.thomasross.frcscout;
+package io.thomasross.frcscout.views;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
@@ -13,6 +13,9 @@ import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import io.thomasross.frcscout.FinishedCallback;
+import io.thomasross.frcscout.GamesManager;
+import io.thomasross.frcscout.R;
 import io.thomasross.frcscout.adapters.TaskListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
 import io.thomasross.frcscout.models.Task;
@@ -23,11 +26,12 @@ import io.thomasross.frcscout.tasks.UpdateTeamTask;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
-public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,FinishedCallback
+public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, FinishedCallback
 {
-    int teamNumber;
-    TaskListAdapter tasksListAdapter;
+    private int teamNumber;
+    private TaskListAdapter tasksListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -84,7 +88,7 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
         HashMap<String, Boolean> tasksMap = new HashMap<>();
         for (Task task : tasks)
         {
-            tasksMap.put(task.code, task.isTeamAble);
+            tasksMap.put(task.getCode(), task.isTeamAble());
         }
 
         Gson gson = new GsonBuilder().create();
@@ -136,8 +140,6 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
         return new TeamLoader(this, null, where, whereArgs);
     }
 
-
-
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data)
     {
@@ -149,13 +151,13 @@ public class EditTeam extends AppCompatActivity implements LoaderManager.LoaderC
             EditText teamNameET = (EditText) findViewById(R.id.teamname_edit_ET);
             EditText autoPointsET = (EditText) findViewById(R.id.autonomouspoints_edit_ET);
 
-            teamNumberET.setText("" + data.getInt(0));
+            teamNumberET.setText(String.format(Locale.US, "%d", data.getInt(0)));
             teamNameET.setText(data.getString(1));
-            autoPointsET.setText("" + data.getInt(3));
+            autoPointsET.setText(String.format(Locale.US, "%d", data.getInt(3)));
 
             String tasksJSON = data.getString(2);
 
-            Type jsonType = new TypeToken<HashMap<String, Boolean>>(){}.getType();
+            Type jsonType = new TypeToken<HashMap<String, Boolean>>() {}.getType();
             Gson gson = new GsonBuilder().create();
             HashMap<String, Boolean> tasksMap = gson.fromJson(tasksJSON, jsonType);
 

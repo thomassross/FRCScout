@@ -47,10 +47,10 @@ public class InsertTeamTask extends AsyncTask<Team, Void, Void>
         for (Team team : teams)
         {
             ContentValues values = new ContentValues();
-            values.put("TEAMNUMBER", team.number);
-            values.put("TEAMNAME", team.name);
-            values.put("TASKS", team.tasks);
-            values.put("AUTOPTS", team.autoPoints);
+            values.put("TEAMNUMBER", team.getNumber());
+            values.put("TEAMNAME", team.getName());
+            values.put("TASKS", team.getTasks());
+            values.put("AUTOPTS", team.getAutoPoints());
             writeableDB.insert(GamesManager.getCurrentTableName(), null, values);
         }
 

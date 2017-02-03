@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import io.thomasross.frcscout.adapters.TeamListAdapter;
 import io.thomasross.frcscout.loaders.TeamLoader;
 import io.thomasross.frcscout.models.Team;
+import io.thomasross.frcscout.views.AddTeam;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -124,7 +125,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
         {
             String tasksJSON = data.getString(2);
 
-            Type jsonType = new TypeToken<HashMap<String, Boolean>>(){}.getType();
+            Type jsonType = new TypeToken<HashMap<String, Boolean>>() {}.getType();
             Gson gson = new GsonBuilder().create();
             HashMap<String, Boolean> tasksMap = gson.fromJson(tasksJSON, jsonType);
 
@@ -143,7 +144,7 @@ public class Main extends AppCompatActivity implements LoaderManager.LoaderCallb
                 }
             }
 
-            Team team = new Team(data.getInt(0), data.getString(1), data.getString(2), data.getInt(3), numTasksAble, tasks.size());
+            Team team = new Team(data.getInt(0), data.getString(1), data.getString(2), data.getInt(3), numTasksAble);
             teams.add(team);
         }
 

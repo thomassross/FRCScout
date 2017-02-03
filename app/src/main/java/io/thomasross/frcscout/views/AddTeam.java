@@ -1,4 +1,4 @@
-package io.thomasross.frcscout;
+package io.thomasross.frcscout.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+import io.thomasross.frcscout.FinishedCallback;
+import io.thomasross.frcscout.R;
 import io.thomasross.frcscout.models.Team;
 import io.thomasross.frcscout.tasks.InsertTeamTask;
 

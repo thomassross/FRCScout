@@ -18,18 +18,18 @@ public class TeamsOpenHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("CREATE TABLE " + GamesManager.GAME_2016_TABLE_NAME + " (" +
-                "TEAMNUMBER INT NOT NULL, " +
-                "TEAMNAME TEXT, " +
-                "TASKS TEXT, " +
-                "AUTOPTS INT" +
-                ");");
+                   "TEAMNUMBER INT NOT NULL, " +
+                   "TEAMNAME TEXT, " +
+                   "TASKS TEXT, " +
+                   "AUTOPTS INT" +
+                   ");");
 
         db.execSQL("CREATE TABLE " + GamesManager.GAME_2017_TABLE_NAME + " (" +
-                "TEAMNUMBER INT NOT NULL, " +
-                "TEAMNAME TEXT, " +
-                "TASKS TEXT, " +
-                "AUTOPTS INT" +
-                ");");
+                   "TEAMNUMBER INT NOT NULL, " +
+                   "TEAMNAME TEXT, " +
+                   "TASKS TEXT, " +
+                   "AUTOPTS INT" +
+                   ");");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TeamsOpenHelper extends SQLiteOpenHelper
         if (oldVersion < 4)
         {
             db.execSQL("ALTER TABLE Teams " +
-                    "ADD COLUMN AUTOPTS INT;");
+                       "ADD COLUMN AUTOPTS INT;");
         }
 
         if (oldVersion == 4 && newVersion == 5)
@@ -46,11 +46,11 @@ public class TeamsOpenHelper extends SQLiteOpenHelper
             db.execSQL("ALTER TABLE Teams RENAME TO " + GamesManager.GAME_2016_TABLE_NAME);
 
             db.execSQL("CREATE TABLE " + GamesManager.GAME_2017_TABLE_NAME + " (" +
-                    "TEAMNUMBER INT NOT NULL, " +
-                    "TEAMNAME TEXT, " +
-                    "TASKS TEXT, " +
-                    "AUTOPTS INT" +
-                    ");");
+                       "TEAMNUMBER INT NOT NULL, " +
+                       "TEAMNAME TEXT, " +
+                       "TASKS TEXT, " +
+                       "AUTOPTS INT" +
+                       ");");
         }
     }
 }

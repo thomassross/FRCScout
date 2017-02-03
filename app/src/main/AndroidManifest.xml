@@ -14,9 +14,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AddTeam"
+        <activity android:name=".views.AddTeam"
                   android:screenOrientation="portrait"/> // TODO: Don't do this!
-        <activity android:name=".EditTeam"
+        <activity android:name=".views.EditTeam"
                   android:screenOrientation="portrait"/> // TODO: Don't do this!
     </application>
 </manifest>

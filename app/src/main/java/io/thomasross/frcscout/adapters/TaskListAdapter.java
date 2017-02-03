@@ -1,6 +1,7 @@
 package io.thomasross.frcscout.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,9 @@ public class TaskListAdapter extends ArrayAdapter<Task>
         CheckBox able;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, View convertView, @NonNull ViewGroup parent)
     {
         ViewHolder holder;
 
@@ -53,7 +55,7 @@ public class TaskListAdapter extends ArrayAdapter<Task>
                 {
                     CheckBox checkBox = (CheckBox) v;
                     Task task = (Task) v.getTag();
-                    task.isTeamAble = checkBox.isChecked();
+                    task.setTeamAble(checkBox.isChecked());
                 }
             });
         }
@@ -63,8 +65,8 @@ public class TaskListAdapter extends ArrayAdapter<Task>
         }
 
         Task task = taskList.get(position);
-        holder.able.setChecked(task.isTeamAble);
-        holder.able.setText(task.name);
+        holder.able.setChecked(task.isTeamAble());
+        holder.able.setText(task.getName());
         holder.able.setTag(task);
 
         return convertView;

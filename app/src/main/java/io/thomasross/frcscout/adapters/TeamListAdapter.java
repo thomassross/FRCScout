@@ -4,12 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import io.thomasross.frcscout.EditTeam;
+import io.thomasross.frcscout.views.EditTeam;
+import io.thomasross.frcscout.GamesManager;
 import io.thomasross.frcscout.R;
 import io.thomasross.frcscout.models.Team;
 
@@ -38,9 +40,10 @@ public class TeamListAdapter extends ArrayAdapter<Team>
         this.context = context;
     }
 
+    @NonNull
     @SuppressLint("DefaultLocale")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, View convertView, @NonNull ViewGroup parent)
     {
         final ViewHolder holder;
         final Team team = teams.get(position);
@@ -62,7 +65,7 @@ public class TeamListAdapter extends ArrayAdapter<Team>
                 public void onClick(View v)
                 {
                     Intent intent = new Intent(context, EditTeam.class);
-                    intent.putExtra("io.thomasross.frcscout.teamnumber", team.number);
+                    intent.putExtra("io.thomasross.frcscout.teamnumber", team.getNumber());
                     context.startActivity(intent);
                 }
             });
@@ -81,7 +84,8 @@ public class TeamListAdapter extends ArrayAdapter<Team>
                         @Override
                         public boolean onMenuItemClick(MenuItem item)
                         {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thebluealliance.com/team/" + team.number));
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                                    "https://www.thebluealliance.com/team/" + team.getNumber()));
                             context.startActivity(intent);
                             return false;
                         }
@@ -96,8 +100,10 @@ public class TeamListAdapter extends ArrayAdapter<Team>
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.namenum.setText(String.format("%d - %s", team.number, team.name));
-        holder.stats.setText(String.format("%d/%d tasks, %d auto points", team.canDoTasks, team.totalTasks, team.autoPoints));
+        holder.namenum.setText(String.format("%d - %s", team.getNumber(), team.getName()));
+        holder.stats.setText(
+                String.format("%d/%d tasks, %d auto points", team.getCanDoTasks(), GamesManager.getNumTasks(),
+                              team.getAutoPoints()));
 
         return convertView;
     }

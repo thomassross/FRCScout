@@ -47,10 +47,10 @@ public class UpdateTeamTask extends AsyncTask<Team, Void, Void>
         for (Team team : params)
         {
             ContentValues values = new ContentValues();
-            values.put("TEAMNAME", team.name);
-            values.put("TASKS", team.tasks);
-            values.put("AUTOPTS", team.autoPoints);
-            String[] whereArgs = {"" + team.number};
+            values.put("TEAMNAME", team.getName());
+            values.put("TASKS", team.getTasks());
+            values.put("AUTOPTS", team.getAutoPoints());
+            String[] whereArgs = {"" + team.getNumber()};
             writeableDB.update(GamesManager.getCurrentTableName(), values, "TEAMNUMBER = ?", whereArgs);
         }
 

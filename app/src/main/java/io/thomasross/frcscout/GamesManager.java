@@ -57,4 +57,9 @@ public class GamesManager
         }
         return tasks;
     }
+
+    public static int getNumTasks()
+    {
+        return GamesManager.getTasks().size();
+    }
 }
